@@ -1,21 +1,21 @@
 <?php
-namespace Theory;
+//namespace Theory;
+require_once 'Application.php';
 
-function handle($url){
-  if ('/' === $url){
-    return "<p> Welcome to PHP</p>";
-  }else if ('/about' === $url){
-    return "About company";
-  }else if ('/server' === $url){
+$routes = [
+  ['/' , function(){
+    return '<p> Main page</p>';
+  }],
+  ['/about', function(){
+    return '<p> About Company </p>';
+  }],
+  ['/server', function(){
     print_r($_SERVER);
-  }else{
-    return "Route was not found";
-  }
-}
+    return '<p> Server Stats</p>';
+  }]
+];
 
-echo handle($_SERVER['REQUEST_URI']);
-
-
-
+$app = new Application($routes);
+$app->run();
 ?>
 
